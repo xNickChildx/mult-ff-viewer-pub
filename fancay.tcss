@@ -1,0 +1,31 @@
+
+.losing {
+    border: solid darkred;
+}
+.winning {
+    border: solid darkgreen;
+}
+.tied {
+    border: solid orange;
+}
+
+.team {
+	text-style: bold underline;
+}
+
+.player {
+	color: auto;
+}
+
+.autosize {
+	height: auto;
+}
+
+.benched {
+	text-style: strike;
+}
+
+.killin-it {
+	color: auto 80%;
+	background: green 80%;
+}

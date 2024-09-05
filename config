@@ -1,0 +1,11 @@
+[team_info]
+year = 2024
+user_name = "Nick Child" "Tara Becker"
+# space separated list
+league_ids = 1857982 878536455 461496669
+
+# get these values from cookies after espn fantasy login
+# email me for these values or something idk
+[secrets]
+espn_s2 = <REDACTED LONG STRING>
+swid = <REDACTED SHORTER STRING>
