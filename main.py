@@ -107,7 +107,7 @@ class FFAPP(App):
 								for player in filter(lambda p: p.game_date == t, m[1]):
 									short_name = f"{player.name.split()[0][0]}. {player.name.split()[-1]}"
 									points = player.points
-									proj = player.projected_avg_points
+									proj = player.projected_points
 									is_benched = player.slot_position == "BE" or player.slot_position == "IR"
 									player_css = "player benched" if is_benched else "player"
 									# yield ListItem(Label(short_name, classes = "autosize"))
