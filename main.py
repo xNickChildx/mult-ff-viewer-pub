@@ -32,10 +32,8 @@ def read_league(league, user_name):
 	team = get_team_under_name(league, user_name)
 	box_score = [x for x in league.box_scores() if x.home_team == team or x.away_team == team][0]
 	is_away = team == box_score.away_team
-	box_me = sorted(box_score.away_lineup if is_away else box_score.home_lineup, \
-				key = lambda x: x.game_date if not x.on_bye_week else 0)
-	box_them = sorted(box_score.home_lineup if is_away else box_score.away_lineup, \
-				key = lambda x: x.game_date if not x.on_bye_week else 0)
+	box_me = box_score.away_lineup if is_away else box_score.home_lineup
+	box_them = box_score.home_lineup if is_away else box_score.away_lineup
 	them = box_score.home_team if is_away else box_score.away_team 
 	week = team.ties + team.losses + team.wins + 1
 	return team.team_name, {'me': team, 'them': them, 'box_me': box_me, 'box_them': box_them, 'is_away': is_away, 'box': box_score, 'week': week}
@@ -67,7 +65,7 @@ class FFAPP(App):
 		slots = []
 		for v in self.data.values():
 			for players in v['box_me'] + v['box_them']:
-				if players.game_date not in slots:
+				if not players.on_bye_week and players.game_date not in slots:
 					slots.append(players.game_date)
 		cols = ['name', 'points', 'projected']
 		slots.sort()
@@ -104,7 +102,7 @@ class FFAPP(App):
 						for m in matchup:
 							with VerticalScroll():
 								yield Label(m[0], classes = "team")
-								for player in filter(lambda p: p.game_date == t, m[1]):
+								for player in filter(lambda p: not p.on_bye_week and p.game_date == t, m[1]):
 									short_name = f"{player.name.split()[0][0]}. {player.name.split()[-1]}"
 									points = player.points
 									proj = player.projected_points
