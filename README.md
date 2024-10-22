@@ -9,3 +9,4 @@ Python dependencies: `textual`, `configparser`
 `python3 main.py`:
 
 ![](./demo.gif)
+![](./pic.png)
